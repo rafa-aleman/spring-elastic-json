@@ -1,5 +1,6 @@
 package com.example.elastic;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -9,8 +10,10 @@ public class Athlete {
 	@Id
 	private String id;
 
+	@JsonProperty("nombre")
 	private String firstName;
 
+	@JsonProperty("apellido")
 	private String lastName;
 
 	public Athlete() {}
