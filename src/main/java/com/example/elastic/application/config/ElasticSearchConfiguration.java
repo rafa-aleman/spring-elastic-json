@@ -1,9 +1,7 @@
-package com.example.elastic;
-
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+package com.example.elastic.application.config;
 
 import org.elasticsearch.client.node.NodeClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.elasticsearch.common.settings.Settings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -11,12 +9,11 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 import java.util.UUID;
 
-@Configuration
-@EnableElasticsearchRepositories(basePackages = "com.example.elastic.application")
-public class ElasticsearchConfig {
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
-	@Autowired
-	private ElasticsearchTemplate elasticsearchTemplate;
+@Configuration
+@EnableElasticsearchRepositories
+public class ElasticSearchConfiguration {
 
 	@Bean
 	public ElasticsearchTemplate elasticsearchTemplate() {
@@ -24,8 +21,9 @@ public class ElasticsearchConfig {
 	}
 
 	private static NodeClient getNodeClient() {
-		return (NodeClient) nodeBuilder().clusterName(UUID.randomUUID().toString()).local(true).node()
+		return (NodeClient) nodeBuilder()
+				.settings(Settings.builder().put("path.home", "localhost:9300"))
+				.clusterName(UUID.randomUUID().toString()).local(true).node()
 				.client();
 	}
-
 }
