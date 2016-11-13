@@ -1,8 +1,10 @@
-package com.example.elastic;
+package com.example.elastic.application.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Document(indexName = "athlete", type = "athlete", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Athlete {
@@ -10,9 +12,11 @@ public class Athlete {
 	@Id
 	private String id;
 
+	//@Field(type = FieldType.String, store = true)
 	@JsonProperty("nombre")
 	private String firstName;
 
+	//@Field(type = FieldType.String, store = true)
 	@JsonProperty("apellido")
 	private String lastName;
 

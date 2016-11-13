@@ -1,5 +1,6 @@
-package com.example.elastic;
+package com.example.elastic.application.repository;
 
+import com.example.elastic.application.domain.Athlete;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;

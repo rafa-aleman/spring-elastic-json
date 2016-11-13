@@ -1,5 +1,7 @@
-package com.example.elastic;
+package com.example.elastic.application;
 
+import com.example.elastic.application.domain.Athlete;
+import com.example.elastic.application.repository.AthleteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
