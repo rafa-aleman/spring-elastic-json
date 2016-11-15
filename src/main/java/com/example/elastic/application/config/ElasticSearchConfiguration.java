@@ -1,7 +1,6 @@
 package com.example.elastic.application.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +36,7 @@ public class ElasticSearchConfiguration {
 	@Bean
 	public ObjectMapper objectMapper() {
 		final ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CASE);
+		objectMapper.setPropertyNamingStrategy(new MyPropertyNamingStrategy());
 		return objectMapper;
 	}
 
