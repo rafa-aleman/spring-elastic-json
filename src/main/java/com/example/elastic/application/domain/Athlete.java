@@ -1,12 +1,9 @@
 package com.example.elastic.application.domain;
 
-import com.example.elastic.application.config.MyPropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "athlete", type = "athlete", shards = 1, replicas = 0, refreshInterval = "-1")
-@JsonNaming(MyPropertyNamingStrategy.class)
 public class Athlete {
 
 	@Id
