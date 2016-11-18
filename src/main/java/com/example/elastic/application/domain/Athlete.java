@@ -2,11 +2,13 @@ package com.example.elastic.application.domain;
 
 import com.example.elastic.application.config.MyPropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "athlete", type = "athlete", shards = 1, replicas = 0, refreshInterval = "-1")
 @JsonNaming(MyPropertyNamingStrategy.class)
+@Data
 public class Athlete {
 
 	@Id
@@ -23,33 +25,4 @@ public class Athlete {
 		this.lastName = lastName;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Athlete[id=%s, firstName='%s', lastName='%s']", this.id,
-				this.firstName, this.lastName);
-	}
 }
