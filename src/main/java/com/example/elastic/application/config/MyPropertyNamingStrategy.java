@@ -11,6 +11,10 @@ import java.util.Properties;
 
 public class MyPropertyNamingStrategy extends PropertyNamingStrategy {
 
+	private final static String APPLICATION_PROPERTIES = "application.properties";
+
+	private final static String JSON_NAMES_FILE_PROPERTY ="mypropertynamingstrategy.jsonnamesfile";
+
 	private String jsonNamesFile = "jsonNames.properties";
 
 	private Properties properties;
@@ -56,10 +60,10 @@ public class MyPropertyNamingStrategy extends PropertyNamingStrategy {
 
 	private void checkApplicationProperties() {
 		final ClassLoader classLoader = getClass().getClassLoader();
-		try (final InputStream inStream = classLoader.getResource("application.properties").openStream()) {
+		try (final InputStream inStream = classLoader.getResource(APPLICATION_PROPERTIES).openStream()) {
 			final Properties applicationProperties = new Properties();
 			applicationProperties.load(inStream);
-			final String fileName = applicationProperties.getProperty("mypropertynamingstrategy.jsonnamesfiles");
+			final String fileName = applicationProperties.getProperty(JSON_NAMES_FILE_PROPERTY);
 			if(fileName != null) {
 				jsonNamesFile = fileName;
 			}
