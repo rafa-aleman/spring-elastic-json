@@ -11,15 +11,17 @@ import java.util.Properties;
 
 public class MyPropertyNamingStrategy extends PropertyNamingStrategy {
 
-	Properties properties;
+	private String jsonNamesFile = "jsonNames.properties";
+
+	private Properties properties;
 
 	public MyPropertyNamingStrategy(){
+		this.checkApplicationProperties();
 		properties = new Properties();
-		try {
-			final ClassLoader classLoader = getClass().getClassLoader();
-			final InputStream inStream = classLoader.getResource("jsonNames.properties").openStream();
+		final ClassLoader classLoader = getClass().getClassLoader();
+
+		try (final InputStream inStream = classLoader.getResource(jsonNamesFile).openStream()){
 			properties.load(inStream);
-			inStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,12 +45,26 @@ public class MyPropertyNamingStrategy extends PropertyNamingStrategy {
 		return convert(method.getDeclaringClass().getSimpleName(), defaultName);
 	}
 
-	public String convert(final String className, final String defaultName )
+	private String convert(final String className, final String defaultName )
 	{
 		String value = properties.getProperty(className + "." + defaultName);
 		if (value == null) {
 			value = defaultName;
 		}
 		return value;
+	}
+
+	private void checkApplicationProperties() {
+		final ClassLoader classLoader = getClass().getClassLoader();
+		try (final InputStream inStream = classLoader.getResource("application.properties").openStream()) {
+			final Properties applicationProperties = new Properties();
+			applicationProperties.load(inStream);
+			final String fileName = applicationProperties.getProperty("mypropertynamingstrategy.jsonnamesfiles");
+			if(fileName != null) {
+				jsonNamesFile = fileName;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
