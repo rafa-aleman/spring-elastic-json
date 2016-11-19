@@ -1,7 +1,7 @@
 package com.example.elastic.application;
 
-import com.example.elastic.application.domain.Athlete;
-import com.example.elastic.application.repository.AthleteRepository;
+import com.example.elastic.application.domain.Person;
+import com.example.elastic.application.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,38 +15,38 @@ import org.springframework.context.annotation.ComponentScan;
 public class ElasticsearchApplication implements CommandLineRunner {
 
 	@Autowired
-	private AthleteRepository athleteRepository;
+	private PersonRepository personRepository;
 
 	public void run(String... args) throws Exception {
-		this.athleteRepository.deleteAll();
-		saveAthletes();
-		fetchAllAthletes();
-		fetchIndividualAthletes();
+		this.personRepository.deleteAll();
+		savePersons();
+		fetchAllPersons();
+		fetchIndividualPersons();
 	}
 
-	private void saveAthletes() {
-		this.athleteRepository.save(new Athlete("Bar", "Foo"));
-		this.athleteRepository.save(new Athlete("Par", "Foo"));
+	private void savePersons() {
+		this.personRepository.save(new Person("Bar", "Foo"));
+		this.personRepository.save(new Person("Par", "Foo"));
 	}
 
-	private void fetchAllAthletes() {
-		System.out.println("Athletes found with findAll():");
+	private void fetchAllPersons() {
+		System.out.println("Persons found with findAll():");
 		System.out.println("-------------------------------");
-		for (Athlete athlete : this.athleteRepository.findAll()) {
-			System.out.println(athlete);
+		for (Person person : this.personRepository.findAll()) {
+			System.out.println(person);
 		}
 		System.out.println();
 	}
 
-	private void fetchIndividualAthletes() {
-		System.out.println("Athlete found with findByFirstName('Bar'):");
+	private void fetchIndividualPersons() {
+		System.out.println("Persons found with findByFirstName('Bar'):");
 		System.out.println("--------------------------------");
-		System.out.println(this.athleteRepository.findByFirstName("Bar"));
+		System.out.println(this.personRepository.findByFirstName("Bar"));
 
-		System.out.println("Athletes found with findByLastName('Foo'):");
+		System.out.println("Persons found with findByLastName('Foo'):");
 		System.out.println("--------------------------------");
-		for (Athlete athlete : this.athleteRepository.findByLastName("Foo")) {
-			System.out.println(athlete);
+		for (Person person : this.personRepository.findByLastName("Foo")) {
+			System.out.println(person);
 		}
 	}
 

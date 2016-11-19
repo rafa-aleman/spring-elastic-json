@@ -6,10 +6,10 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "athlete", type = "athlete", shards = 1, replicas = 0, refreshInterval = "-1")
+@Document(indexName = "person", type = "person", shards = 1, replicas = 0, refreshInterval = "-1")
 @JsonNaming(MyPropertyNamingStrategy.class)
 @Data
-public class Athlete {
+public class Person {
 
 	@Id
 	private String id;
@@ -18,9 +18,9 @@ public class Athlete {
 
 	private String lastName;
 
-	public Athlete() {}
+	public Person() {}
 
-	public Athlete(final String firstName, final String lastName) {
+	public Person(final String firstName, final String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
